@@ -23,15 +23,18 @@ class StudentController extends Controller
    }
     
     public function DashboardApprenant(){
+
+
         $currentUser = Auth::user();
         //var_dump($currentUser);
-        $student = StudentController::studentByIdUser($currentUser);
-        $projectsBystudent=StudentController::ProjectBystudent($currentUser);
+        $student = Student::where('id_user', Auth::user()->id)->firstOrFail();
+
+        // $projectsBystudent=$student->projects;
         //($student)
         //$student->projects();
        
         $allTechnologiesStudent = [];
-       foreach ($projectsBystudent as $project) {
+       foreach ($student->projects as $project) {
         $tags = trim($project->tags,'"');
         $tags = explode(',', $tags);
         $project->tags = $tags;
@@ -47,7 +50,7 @@ class StudentController extends Controller
 
 
     
-    return view('dashboard',compact("student","projectsBystudent", "allTechnologiesStudent"));
+    return view('dashboard',compact("student", "allTechnologiesStudent"));
 }
 
 /*public function projectsByTechnology($technology){
@@ -111,7 +114,6 @@ public function ProjectBystudent($currentUser){
      //DB::table('students')->where('id_user', $currentUser->id)->first();
      $idStudent =Student::select('id')->where('id_user', $currentUser->id)->pluck('id');
     //$ = $student[0]->id_user;
-    
     $projectBystudent = Project::with('students')->whereHas('students')->get();
     /* {
         $query->where('project_student.student_id','$idStudent');

@@ -184,7 +184,7 @@
 						</li>
 						@endif
 						<!-- /User Menu -->
-						<li><a href="post-project" class="login-btn">Post a Project </a></li>
+						<li><a href="{{route('post-project')}}" class="login-btn">Post a Project </a></li>
 
 					</ul>
 				</nav>

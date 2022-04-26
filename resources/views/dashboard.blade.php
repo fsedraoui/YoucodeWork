@@ -71,7 +71,7 @@
 										<div class="dash-widget">
 											<div class="dash-info">
 												<div class="dash-widget-info">Projets en attente de validation</div>
-												<div class="dash-widget-count">{{$projectsBystudent->count()}}</div>
+												<div class="dash-widget-count">{{$student->projects()->count()}}</div>
 											</div>
 											<div class="dash-widget-more">
 												<a href="freelancer-completed-projects" class="d-flex">View Details <i class="fas fa-arrow-right ms-auto"></i></a>

@@ -32,9 +32,7 @@ Route::get('/dashboard', [StudentController::class, 'Role'])->middleware(['auth'
 
 })->middleware(['auth'])->name('dashboard');*/
 
-Route::get('/freelancer-project-proposals', function () {
-    return view('freelancer-project-proposals');
-})->name('freelancer-project-proposals');
+
 Route::get('/post-project', function () {return view('post-project');})->name('post-project');
 Route::get('/apprenant-dashboard', function () {return view('apprenant-dashboard');})->name('apprenant-dashboard');
 Route::get('/manage-projects', function () { return view('manage-projects');})->name('manage-projects');
@@ -51,3 +49,4 @@ Route::get('/freelancer-dashboard', function () {
 //Route::get('/freelancer-project-proposals', function () { return view('freelancer-project-proposals');})->name('freelancer-project-proposals');
 require __DIR__.'/auth.php';
 
+Route::get('/projectsbystudent', [StudentController::class, 'ProjectBystudent'])->name('projectsbystudent');
