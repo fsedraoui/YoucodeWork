@@ -17,14 +17,37 @@ class StudentController extends Controller
     
     if(Auth::user()->role == 'recruiter'){
         return view('dashboard');
-    } else if(Auth::user()->role == 'student'){
+    } else if (Auth::user()->role == 'student'){
         return StudentController::DashboardApprenant();
-    }
+    } 
    }
     
     public function DashboardApprenant(){
+        
+      /*  $client = new \GuzzleHttp\Client();
 
+        $response = $client->request('POST', 'http://admin.youcode.school/api/login', [
+            'form_params' => [
+                'email' => 'sedraoui.fatimaezzahra@gmail.com',
+                'password'     => '',
+            ]
+        ]);        
 
+        // echo $response->getStatusCode(); // 200
+        // echo $response->getHeaderLine('content-type'); // 'application/json; charset=utf8'
+
+            
+        $body = json_decode($response->getBody(), true); // '{"id": 1420053, "name": "guzzle", ...}'
+        $res = $client->request('GET', 'http://admin.youcode.school/api/promotions', [
+            'headers' => [
+                'User-Agent' => 'testing/1.0',
+                'Accept'     => 'application/json',
+                'Authorization'      => 'Bearer ' . $body['access_token']
+            ]
+        ]);
+
+       // $body = json_decode($res->getBody(), true); // '{"id": 1420053, "name": "guzzle", ...}'
+       // print_r($body);*/
         $currentUser = Auth::user();
         //var_dump($currentUser);
         $student = Student::where('id_user', Auth::user()->id)->firstOrFail();

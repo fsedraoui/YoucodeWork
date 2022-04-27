@@ -2457,7 +2457,7 @@ html.menu-opened body header:before {
 	overflow: hidden;
 }
 .bg1 {
-	background: #3488da;
+	background: #414950;
 	background-image: url(../../assets/img/bg/project-bg.png);
     background-repeat: no-repeat;
     background-position: right bottom;
@@ -2475,7 +2475,7 @@ html.menu-opened body header:before {
     background-color: rgba(255, 255, 255, 0.21);
 }
 .bg2 {
-	background: #FFF5F3;
+	background: #FFF;
 	background-image: url(../../assets/img/bg/work-bg.png);
     background-repeat: no-repeat;
     background-position: right bottom;
@@ -2685,7 +2685,7 @@ html.menu-opened body header:before {
     background: #131135;
     border: 3px solid #131135;
     border-radius: 50px;
-    color: #FFF5F3;
+    color: #FFF;
     font-weight: bold;
     font-size: 18px;
 }
@@ -2799,7 +2799,6 @@ html.menu-opened body header:before {
 .developer {
 	position: relative;
 	padding: 80px 0 50px;
-	background-image: url(../../assets/img/bg/bg-04.png), url(../../assets/img/bg/bg-05.png);
     background-repeat: no-repeat, no-repeat;
     background-position: right top, left center;
 }
@@ -9689,7 +9688,7 @@ label.award-upload input[type="file"] {
     padding: 12px;
 }
 .project-proposals {
-    background: #FFF5F3;
+    background: #fff;
     border: 1px solid rgba(255, 91, 55, 0.1);
     padding: 12px;
 	margin-bottom: 15px;
