@@ -18,7 +18,7 @@ class CreateInstructorsTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('email');
-            $table->foreignId('groupId')->constrained("groups")->nullOnDelete();
+            // $table->foreignId('groupId')->constrained("groups")->nullOnDelete();
             $table->timestamps();
         });
     }

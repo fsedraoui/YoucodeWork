@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\JobController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +20,8 @@ Route::get('/index', function () {
 })->name('pagee');
 Route::get('/', function () {
     return view('index');
-    })->name('home');   
-    
+    })->name('home');
+
 Route::get('/dashboard', [StudentController::class, 'Role'])->middleware(['auth'])->name('dashboard');
 
 /*Route::get('/dashboard', function () {
@@ -34,6 +35,7 @@ Route::get('/dashboard', [StudentController::class, 'Role'])->middleware(['auth'
 
 
 Route::get('/post-project', function () {return view('post-project');})->name('post-project');
+Route::get('/post-job', function () {return view('post-job');})->name('post-job');
 Route::get('/apprenant-dashboard', function () {return view('apprenant-dashboard');})->name('apprenant-dashboard');
 Route::get('/manage-projects', function () { return view('manage-projects');})->name('manage-projects');
 //Route::get('/freelancer-project-proposals', [ProjectController::class, 'allProjects'])->middleware(['auth'])->name('freelancer-project-proposals');
@@ -41,7 +43,12 @@ Route::post('/post-project', [ProjectController::class, 'store'])->middleware(['
 Route::get('/project-details/{projectId}', [ProjectController::class, 'projectById'])->middleware(['auth'])->name('project-details');
 Route::get('/projects', [ProjectController::class, 'allProjects'])->middleware(['auth'])->name('projects');
 Route::get('/projects/{technology}', [ProjectController::class, 'projectsByTechnology'])->middleware(['auth'])->name('projects-by-technology');
-Route::get('/freelancer-project-proposals', function () {return view('freelancer-project-proposals');})->name('freelancer-project-proposals');
+
+// routes for job
+// Route::get('/freelancer-project-proposals', function () {return view('freelancer-project-proposals');})->name('freelancer-project-proposals');
+// Route::get('/post-job', function () {return view('post-job');})->name('post-job');
+Route::get('/post-job', [JobController::class, 'create'])->name('post-job');
+Route::post('/store-job', [JobController::class, 'store'])->name('store-job');
 
 Route::get('/freelancer-dashboard', function () {
     return view('freelancer-dashboard');

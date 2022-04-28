@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     use HasFactory;
+    protected $fillable = ['position','contract','tags','isRemote','contractType','description','responsibilities','authorId'];
+
 }
