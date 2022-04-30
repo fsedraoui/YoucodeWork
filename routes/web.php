@@ -44,11 +44,11 @@ Route::get('/project-details/{projectId}', [ProjectController::class, 'projectBy
 Route::get('/projects', [ProjectController::class, 'allProjects'])->middleware(['auth'])->name('projects');
 Route::get('/projects/{technology}', [ProjectController::class, 'projectsByTechnology'])->middleware(['auth'])->name('projects-by-technology');
 
+Route::get('/freelancer-project-proposals', function () {return view('freelancer-project-proposals');})->name('freelancer-project-proposals');
 // routes for job
-// Route::get('/freelancer-project-proposals', function () {return view('freelancer-project-proposals');})->name('freelancer-project-proposals');
-// Route::get('/post-job', function () {return view('post-job');})->name('post-job');
-Route::get('/post-job', [JobController::class, 'create'])->name('post-job');
-Route::post('/store-job', [JobController::class, 'store'])->name('store-job');
+Route::get('/post-job', function () {return view('post-job');})->name('post-job');
+Route::post('/store-job', [JobController::class,'store'])->name('store-job');
+
 
 Route::get('/freelancer-dashboard', function () {
     return view('freelancer-dashboard');
