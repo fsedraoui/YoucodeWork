@@ -54,6 +54,18 @@
 									</div>
                                     <!-- contract -->
 
+                                    <!-- expired date  -->
+									<div class="title-content">
+                                        <div class="title-detail">
+                                            <h3>Expired date</h3>
+											<div class="form-group mb-0">
+                                                <input type="date"  name="expiredDate" min="" class="input-tags form-control"  id="services"  placeholder="contract">
+
+											</div>
+										</div>
+									</div>
+                                    <!-- expired date -->
+
                                     <!-- Skills tags -->
                                     <div class="title-content">
                                         <div class="title-detail">
