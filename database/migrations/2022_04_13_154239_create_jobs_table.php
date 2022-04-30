@@ -15,10 +15,10 @@ return new class extends Migration {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('position');
-            $table->string('contract');//is correct or not
-            $table->json('tags');//?
+            $table->string('contract');//is correct or not cdi or cdd
+            $table->json('tags');//technologies & outils
             $table->boolean('isRemote');
-            $table->string('contractType');//is correct or not
+            $table->string('contractType');// stage or travial
             $table->text('description');
             $table->text('responsibilities');
             $table->foreignId('authorId')->constrained('recruiters');
