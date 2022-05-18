@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -34,6 +35,57 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
+
+    /**
+     * Display the login view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function createStudent()
+    {   
+        $error= '';
+        return view('auth.loginStudent', compact('error'));
+    }
+
+    /**
+     * Display the login view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function createStaff()
+    {   
+        $error= '';
+        return view('auth.loginStaff', compact('error'));
+    }    
+
+    /**
+     * Handle an incoming authentication request.
+     *
+     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeStudent(LoginRequest $request)
+    {
+        $request->login();
+
+        $request->session()->regenerate();
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }    
+
+    /**
+     * Handle an incoming authentication request.
+     *
+     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeStaff(LoginRequest $request)
+    {
+        $request->login();
+
+        $request->session()->regenerate();
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }    
+
 
     /**
      * Destroy an authenticated session.

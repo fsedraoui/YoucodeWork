@@ -21,6 +21,12 @@
 
 
 										</span>
+
+										<form action="{{ route('projects') }}" method='POST'>
+											@csrf
+											<input type="text" name="keyword" />
+											<input type="submit" value="Search"/>
+										</form>
 						</div>
 					</div>
 				</div>

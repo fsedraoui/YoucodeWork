@@ -27,23 +27,19 @@
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="manage-projects" class="nav-link">
-												<i class="material-icons">business_center</i> Projets en attente de validation
+											<a href="view-jobs" class="nav-link">
+												<i class="material-icons">business_center</i> Postulez pour une offre
+											</a>
+										</li>
+										
+										<li class="nav-item">
+											<a href="apprenant-projetsvalides" class="nav-link">
+												<i class="material-icons">record_voice_over</i> Mes projets
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="freelancer-favourites" class="nav-link">
-												<i class="material-icons">local_play</i> Projets validés
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-review" class="nav-link">
-												<i class="material-icons">record_voice_over</i> Tous mes projets
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-portfolio" class="nav-link">
-												<i class="material-icons">pie_chart</i> tous les projets
+											<a href="projects" class="nav-link">
+												<i class="material-icons">local_play</i> Explorer des Projets
 											</a>
 										</li>
 										<li class="nav-item">

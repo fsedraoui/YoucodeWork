@@ -31,13 +31,13 @@
 								<div class="row filter-row">
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
-											<label>Company Name</label>
+											<label>Titre du Projet</label>
 											<input class="form-control" type="text">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
-											<label>From Date</label>
+											<label>Date de création</label>
 											<div class="cal-icon">
 												<input class="form-control datetimepicker" type="text">
 											</div>
@@ -45,7 +45,7 @@
 									</div>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
-											<label>To Date</label>
+											<label>Date dernière modification</label>
 											<div class="cal-icon">
 												<input class="form-control datetimepicker" type="text">
 											</div>
@@ -73,10 +73,10 @@
 										<a href="#tab-4" data-bs-toggle="tab" class="nav-link active">All (272)</a>
 									</li>
 									<li class="nav-item">
-										<a href="#tab-5" data-bs-toggle="tab" class="nav-link">Active (218)</a>
+										<a href="#tab-5" data-bs-toggle="tab" class="nav-link">Validés (218)</a>
 									</li>
 									<li class="nav-item">
-										<a href="#tab-6" data-bs-toggle="tab" class="nav-link"> In Active (03)
+										<a href="#tab-6" data-bs-toggle="tab" class="nav-link"> En instance (03)
 										</a>
 									</li>
 									<li class="nav-item">
@@ -91,18 +91,19 @@
 											<thead>
 												<tr>
 													<th></th>
-													<th>Logo</th>
-													<th>Title</th>	
-													<th>Budget</th>	
-													<th>Progress</th>	
-													<th>Technology</th>	
-													<th>Company</th>	
-													<th>Start date</th>	
+													<!-- <th>Avatar</th> -->
+													<th>Titre</th>	
+													<th>Date de création</th>	
+													<th>Date de Modification</th>	
+													<th>GitHub</th>	
+													<th>Collaborateurs</th>	
+													<th>Status</th>	
 													<th>Due date</th>	
 													<th class="text-end">Actions</th>
 												</tr>
 											</thead>
 											<tbody>
+											@foreach($instructor->projects as $project)
 												<tr>
 													<td>
 														<div class="form-check form-checkbox">
@@ -110,329 +111,38 @@
 														  <label class="form-check-label" for="customCheck1"></label>
 														</div>
 													</td>
-													<td>
+													<!-- <td>
 														<h2 class="table-avatar">
 															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-1.png" alt="User Image"></a>
 														</h2>
-													</td>
+													</td> -->
 													
-													<td>Website Designer Required For Directory Theme</td>
+													<td>{{$project->name}}</td>
 													<td>
-														$2222
+													{{ \Carbon\Carbon::parse($project->created_at)->translatedFormat('j F, Y') }}
 													</td>
 													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
+													{{ \Carbon\Carbon::parse($project->updated_at)->translatedFormat('j F, Y') }}
 													</td>
 													<td>
-														Angular
+													{{$project->repoLink}}
 													</td>
-													<td>AMAZE TECH</td>
-													<td>22-05-2022</td>
+													<td> @foreach($project->students as $student)
+													{{$student->firstName}}, 
+																													
+														@endforeach</td>
+													<td>
+														@if($project->status == 'PENDING') <button type="button" class="btn btn-warning btn-sm">En instance</button> @endif
+														@if($project->status == 'ACCEPTED') <button type="button" class="btn btn-success btn-sm">Validé</button> @endif
+												
+												 </td>
 													<td>22-05-2022</td>
 													<td class="text-end">
 														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
 														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
 													</td>
 												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck2">
-														  <label class="form-check-label" for="customCheck2"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-2.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>Lorem Ipsum is simply dummy text of</td>
-													<td>
-														$5755
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														Laravel
-													</td>
-													<td>Park INC </td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck3">
-														  <label class="form-check-label" for="customCheck3"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-3.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>It is a long established fact that a reader</td>
-													<td>
-														$5755
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														Vue
-													</td>
-													<td>Tsch Zone</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck4">
-														  <label class="form-check-label" for="customCheck4"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-4.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>There are many variations of passages of Lorem</td>
-													<td>
-														$2333
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														Golang
-													</td>
-													<td>ABC Software</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck5">
-														  <label class="form-check-label" for="customCheck5"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-5.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>Website Designer Required For Directory Theme</td>
-													<td>
-														$2222
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														Node js
-													</td>
-													<td>Host Technologies</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck6">
-														  <label class="form-check-label" for="customCheck6"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-6.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>combined with a handful of model sentence structures</td>
-													<td>
-														$1500
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														.Net
-													</td>
-													<td>SM Developer</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck7">
-														  <label class="form-check-label" for="customCheck7"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-7.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>Designer Required For Directory</td>
-													<td>
-														$2222
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														Java
-													</td>
-													<td>Kind Software</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck8">
-														  <label class="form-check-label" for="customCheck8"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-8.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>Lorem Ipsum is therefore always free content</td>
-													<td>
-														$7789
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 56%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														Python
-													</td>
-													<td>Particles INC</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck9">
-														  <label class="form-check-label" for="customCheck9"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-9.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>Required For Website Developer</td>
-													<td>
-														$2222
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														Codingnator
-													</td>
-													<td>Kind Software</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck10">
-														  <label class="form-check-label" for="customCheck10"></label>
-														</div>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-10.png" alt="User Image"></a>
-														</h2>
-													</td>
-													
-													<td>Lorem Ipsum is therefore always free</td>
-													<td>
-														$7789
-													</td>
-													<td>
-														<div class="progress rounded-pill">
-														  <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 56%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-													</td>
-													<td>
-														React
-													</td>
-													<td>Particles INC</td>
-													<td>22-05-2022</td>
-													<td>22-05-2022</td>
-													<td class="text-end">
-														<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
-													</td>
-												</tr>
+												@endforeach
 											</tbody>
 										</table>
 									</div>

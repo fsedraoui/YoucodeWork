@@ -4,60 +4,78 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Http\Initialize;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use DB;
 
 class StudentController extends Controller
 {
-    
-
     public function Role(){
+        if(Auth::user()->role == 1 ){
+
+            return redirect('/dashboard');
+
+        } else if(Auth::user()->role == 2){
+            //TODO 
+            return redirect('admin.projects');
+            echo 'this is trainer';
+        } else if(Auth::user()->role == 3){
+            //TODO
+            // return redirect('/dashboard-recruiter');
+            return redirect('/freelancer-dashboard');
+        }
+
+
+
+
+    // Session::flush();
     
-    if(Auth::user()->role == 'recruiter'){
-        return view('dashboard');
-    } else if (Auth::user()->role == 'student'){
-        return StudentController::DashboardApprenant();
-    } 
+
+    //     if(Session::get('user')->role_id == '2'){
+    //     return view('dashboard');
+    // } else if (Session::get('user')->role_id == '1'){
+    //     return StudentController::DashboardApprenant();
+    // } 
    }
-    
-    public function DashboardApprenant(){
+   public function projetByStudent(){
+        if(Auth::user()->role != 1){
+            return redirect('/redirectafterlogin');
+        }
         
-      /*  $client = new \GuzzleHttp\Client();
+        Initialize::user();
 
-        $response = $client->request('POST', 'http://admin.youcode.school/api/login', [
-            'form_params' => [
-                'email' => 'sedraoui.fatimaezzahra@gmail.com',
-                'password'     => '',
-            ]
-        ]);        
+        $user = Auth::user();
 
-        // echo $response->getStatusCode(); // 200
-        // echo $response->getHeaderLine('content-type'); // 'application/json; charset=utf8'
+            $student = Student::where('id_user', $user->id)->firstOrFail();
+            Initialize::student($student);
+        return view('freelancer-project-proposals', compact('student','user'));
+}
+    
 
-            
-        $body = json_decode($response->getBody(), true); // '{"id": 1420053, "name": "guzzle", ...}'
-        $res = $client->request('GET', 'http://admin.youcode.school/api/promotions', [
-            'headers' => [
-                'User-Agent' => 'testing/1.0',
-                'Accept'     => 'application/json',
-                'Authorization'      => 'Bearer ' . $body['access_token']
-            ]
-        ]);
 
-       // $body = json_decode($res->getBody(), true); // '{"id": 1420053, "name": "guzzle", ...}'
-       // print_r($body);*/
-        $currentUser = Auth::user();
-        //var_dump($currentUser);
-        $student = Student::where('id_user', Auth::user()->id)->firstOrFail();
+public function DashboardApprenant(){
 
-        // $projectsBystudent=$student->projects;
-        //($student)
-        //$student->projects();
+        if(Auth::user()->role != 1){
+            return redirect('/redirectafterlogin');
+        }
+        
+        Initialize::user();
+
+
+
        
+        $user = Auth::user();
+
+        $student = Student::where('id_user', $user->id)->firstOrFail();
+        Initialize::student($student);
+        
         $allTechnologiesStudent = [];
-       foreach ($student->projects as $project) {
+
+        foreach ($student->projects as $project) {
+
         $tags = trim($project->tags,'"');
         $tags = explode(',', $tags);
         $project->tags = $tags;
@@ -72,8 +90,7 @@ class StudentController extends Controller
     }
 
 
-    
-    return view('dashboard',compact("student", "allTechnologiesStudent"));
+    return view('dashboard',compact("user", "student", "allTechnologiesStudent"));
 }
 
 /*public function projectsByTechnology($technology){

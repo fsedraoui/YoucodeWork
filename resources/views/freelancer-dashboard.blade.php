@@ -4,8 +4,13 @@
 
 
 <!-- Page Content -->
+
 			<div class="content">
 				<div class="container-fluid">
+				
+				<div class="col-md-8 col-lg-12 text-end">
+										<a href="post-job" class="btn btn-primary back-btn mb-4">Ajouter une offre d'emploi</a>
+									</div>
 					<div class="row">
 						<div class="col-xl-3 col-md-4 theiaStickySidebar">
 							<div class="settings-widget">

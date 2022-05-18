@@ -13,8 +13,23 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
+    
+    
+    Route::view('/auth', 'auth.auth')->name('auth');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
+
+
+    
+    Route::get('login-student', [AuthenticatedSessionController::class, 'createStudent'])
+                ->name('login-student');
+
+    Route::post('login-student', [AuthenticatedSessionController::class, 'storeStudent'])->name('login-student-post');    
+
+    Route::get('login-staff', [AuthenticatedSessionController::class, 'createStaff'])
+                ->name('login-staff');
+
+    Route::post('login-staff', [AuthenticatedSessionController::class, 'storeStaff'])->name('login-staff-post');    
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
@@ -53,4 +68,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
+            ->name('logout-get');                
 });

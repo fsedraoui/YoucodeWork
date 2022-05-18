@@ -5,18 +5,32 @@
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
         </x-slot>
-
+        Register as a Recruiter
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <!-- Name -->
+            <!-- Company Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="company" :value="__('Company')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="company" class="block mt-1 w-full" type="text" name="company" :value="old('company')" required autofocus />
+            </div>
+
+            <!-- First Name -->
+            <div>
+                <x-label for="firstName" :value="__('First Name')" />
+
+                <x-input id="firstName" class="block mt-1 w-full" type="text" name="firstName" :value="old('firstName')" required autofocus />
+            </div>
+
+            <!-- Last Name -->
+            <div>
+                <x-label for="lastName" :value="__('Last Name')" />
+
+                <x-input id="lastName" class="block mt-1 w-full" type="text" name="lastName" :value="old('lastName')" required autofocus />
             </div>
 
             <!-- Email Address -->

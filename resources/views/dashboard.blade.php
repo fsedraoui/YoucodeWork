@@ -13,35 +13,31 @@
 									<a href="freelancer-profile"><img alt="profile image" src="assets/img/img-04.jpg" class="avatar-lg rounded-circle"></a>
 									<div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
 										<p class="mb-2">Bienvenu</p>
-										<h3 class="mb-0"><a href="freelancer-profile">{{ Auth::user()->name }}</a></h3>
-										<p class="mb-0">{{ Auth::user()->lastname }}</p>
+										<h3 class="mb-0"><a href="freelancer-profile">{{ Auth::user()->lastName }} {{ Auth::user()->firstName }}</a></h3>
+										
 									</div>
 								</div>
 								<div class="settings-menu">
 									<ul>
 										<li class="nav-item">
-											<a href="freelancer-dashboard" class="nav-link active">
+											<a href="dashboard" class="nav-link active">
 												<i class="material-icons">verified_user</i> Tableau de bord
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="manage-projects" class="nav-link">
-												<i class="material-icons">business_center</i> Projets en attente de validation
+											<a href="view-jobs" class="nav-link">
+												<i class="material-icons">business_center</i> Postulez pour une offre
+											</a>
+										</li>
+										
+										<li class="nav-item">
+											<a href="apprenant-projetsvalides" class="nav-link">
+												<i class="material-icons">record_voice_over</i> Mes projets
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="freelancer-favourites" class="nav-link">
-												<i class="material-icons">local_play</i> Projets validés
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-review" class="nav-link">
-												<i class="material-icons">record_voice_over</i> Tous mes projets
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-portfolio" class="nav-link">
-												<i class="material-icons">pie_chart</i> tous les projets
+											<a href="projects" class="nav-link">
+												<i class="material-icons">local_play</i> Explorer des Projets
 											</a>
 										</li>
 										<li class="nav-item">

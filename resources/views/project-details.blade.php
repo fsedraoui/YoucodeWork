@@ -27,7 +27,7 @@
 										<div class="post-left">
 										
 										
-					<h3 class="blog-title">{{ $project->name }}</h3>	
+										<h3 class="blog-title">{{ $project->name }}</h3>	
 										<ul>
 												<li> 
 													<div class="post-author">
@@ -43,7 +43,7 @@
 									</div>
 											<div>
 										
-</div>
+								</div>
 									<div class="blog-content">
 									</div>
 								</div>

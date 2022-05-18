@@ -9,7 +9,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
+
+use App\Models\Recruiter;
 
 class RegisteredUserController extends Controller
 {
@@ -34,17 +37,29 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string', 'max:255'],
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => $request->firstName . ' ' . $request->lastName,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'recruiter'
+            'role' => '3'
         ]);
+
+        $new_recruiter = new Recruiter;
+
+        $new_recruiter->firstName = $request->firstName;
+        $new_recruiter->lastName = $request->lastName;
+        $new_recruiter->company = $request->company;
+        $new_recruiter->id_user = DB::getPdo()->lastInsertId();
+        
+        $new_recruiter->save();
+
 
         event(new Registered($user));
 

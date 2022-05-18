@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('contract');
             $table->json('tags');
             $table->boolean('isRemote');
-            $table->string('contractType');
+            $table->string('emailCvs');
             $table->text('description');
             $table->text('responsibilities');
             $table->foreignId('authorId')->constrained('recruiters');

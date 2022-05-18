@@ -35,8 +35,8 @@
 								<a href="">Pour apprenant<i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
 								
-									<li class="<?php if($page=="dashboard") { echo 'active'; } ?>"><a href="dashboard">Dashboard</a></li>	
-									<li class="<?php if($page=="manage-projects") { echo 'active'; } ?>"><a href="manage-projects">Nouveau Projet</a></li>							
+									<li class="<?php if($page=="dashboard") { echo 'active'; } ?>"><a href="{{ route('dashboard')}}">Dashboard</a></li>	
+									<li class="<?php if($page=="manage-projects") { echo 'active'; } ?>"><a href="{{ route('manage-projects')}}">Nouveau Projet</a></li>							
 									<li class="<?php if($page=="profile-settings") { echo 'active'; } ?>"><a href="profile-settings">Settings</a></li>								
 								</ul>
 							</li>
@@ -102,7 +102,7 @@
 								<span class="user-img">
 									<img src="assets/img/img-04.jpg" alt="">
 								</span>
-								<span>{{ Auth::user()->name }}</span>
+								<span>{{ $user->first_name }}</span>
 							</a>
 							<div class="dropdown-menu emp">
 								<div class="drop-head">Account Details</div>	
@@ -150,7 +150,7 @@
 						</li>
 						@endif
 						<!-- /User Menu -->
-						<li><a href="post-project" class="login-btn">Post a Project </a></li>
+						<li><a href="{{ route('post-project')}}" class="login-btn">Post a Project </a></li>
 
 					</ul>
 				</nav>

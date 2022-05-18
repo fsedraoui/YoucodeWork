@@ -19,5 +19,7 @@ class Project extends Model
     public function students(){
         return $this->belongsToMany(Student::class);
     }
-    
+    public function instructor(){
+        return $this->belongsTo(Instructor::class);
+    }    
 }

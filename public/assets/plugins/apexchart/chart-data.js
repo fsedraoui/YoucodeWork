@@ -86,7 +86,7 @@ $(document).ready(function() {
 		  var options = {
           series: [{
             name: "profile view",
-            data: [100, 150, 200, 250, 200, 250, 200, 200, 200, 200, 300, 350]
+            data: [10, 15, 20, 25, 20, 25, 20, 20, 20, 20, 30, 35]
         }],
         chart: {
           height: 360,

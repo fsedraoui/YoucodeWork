@@ -1,0 +1,73 @@
+@use "../abstracts" as *;
+
+.auth {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+
+    .logo {
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+
+        img {
+            width: 6rem;
+            @include tablet {
+                width: 8rem;
+            }
+            @include desktop {
+                width: 10rem;
+            }
+        }
+    }
+
+    .sections {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        @include tablet {
+            flex-direction: row;
+        }
+
+        .section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .5s ease;
+            flex-basis: min-content;
+
+            @include tablet {
+
+                &:hover {
+                    flex-basis: 100% !important;
+
+                    a {
+                        font-size: 3.5rem;
+                    }
+                }
+            }
+
+            &:nth-child(2n) {
+                background-color: #e6eaea;
+            }
+
+
+            a {
+
+                font-size: 2.5rem;
+                font-weight: bold;
+                display: flex;
+                gap: .5rem;
+                align-items: flex-start;
+                transition: all 0.5s ease-in-out;
+
+                .prefix {
+                    font-weight: 300;
+                    font-size: .8rem;
+                }
+            }
+        }
+    }
+}
