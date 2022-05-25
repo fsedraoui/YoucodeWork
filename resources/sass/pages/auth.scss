@@ -4,6 +4,7 @@
     position: relative;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 
     .logo {
         position: absolute;
@@ -38,19 +39,85 @@
             transition: all .5s ease;
             flex-basis: min-content;
 
-            @include tablet {
+            $horizontal: 5%;
+            $vertical: 50%;
+            @include desktop {
 
                 &:hover {
                     flex-basis: 100% !important;
 
+                    img {
+                        bottom: -2%;
+                    }
+
                     a {
                         font-size: 3.5rem;
+                    }
+
+                    &:first-of-type {
+                        img {
+                            left: $horizontal;
+                        }
+                    }
+
+                    &:last-of-type {
+                        img {
+                            right: $horizontal;
+                        }
                     }
                 }
             }
 
             &:nth-child(2n) {
                 background-color: #e6eaea;
+            }
+
+
+            $height: 20rem;
+
+            img {
+
+                display: none;
+                height: $height;
+                width: $height - 5rem;
+                position: absolute;
+                left: 50%;
+                bottom: -100%;
+                transform: translateX(-50%) rotate(15deg);
+                transition: all .8s ease-in-out;
+                @include desktop {
+                    display: inline-block;
+                }
+
+                &:nth-child(2n) {
+                    transform: translateX(-50%) rotate(-15deg);
+                }
+            }
+
+            %img {
+                bottom: unset;
+                left: unset;
+                top: 50%;
+                transform: translateY(-50%) rotate(15deg);
+
+                &:nth-child(2n) {
+                    transform: translateY(-50%) rotate(-15deg);
+                }
+            }
+
+            &:first-of-type {
+                img {
+                    @extend %img;
+                    left: -100%;
+                }
+            }
+
+            &:last-of-type {
+                img {
+                    @extend %img;
+                    left: unset;
+                    right: -100%;
+                }
             }
 
 
