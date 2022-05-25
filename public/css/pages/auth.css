@@ -2,6 +2,7 @@
   position: relative;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 .auth .logo {
   position: absolute;
@@ -40,16 +41,59 @@
   transition: all 0.5s ease;
   flex-basis: min-content;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .auth .sections .section:hover {
     flex-basis: 100% !important;
+  }
+  .auth .sections .section:hover img {
+    bottom: -2%;
   }
   .auth .sections .section:hover a {
     font-size: 3.5rem;
   }
+  .auth .sections .section:hover:first-of-type img {
+    left: 5%;
+  }
+  .auth .sections .section:hover:last-of-type img {
+    right: 5%;
+  }
 }
 .auth .sections .section:nth-child(2n) {
   background-color: #e6eaea;
+}
+.auth .sections .section img {
+  display: none;
+  height: 20rem;
+  width: 15rem;
+  position: absolute;
+  left: 50%;
+  bottom: -100%;
+  transform: translateX(-50%) rotate(15deg);
+  transition: all 0.8s ease-in-out;
+}
+@media only screen and (min-width: 992px) {
+  .auth .sections .section img {
+    display: inline-block;
+  }
+}
+.auth .sections .section img:nth-child(2n) {
+  transform: translateX(-50%) rotate(-15deg);
+}
+.auth .sections .section:last-of-type img, .auth .sections .section:first-of-type img {
+  bottom: unset;
+  left: unset;
+  top: 50%;
+  transform: translateY(-50%) rotate(15deg);
+}
+.auth .sections .section:last-of-type img:nth-child(2n), .auth .sections .section:first-of-type img:nth-child(2n) {
+  transform: translateY(-50%) rotate(-15deg);
+}
+.auth .sections .section:first-of-type img {
+  left: -100%;
+}
+.auth .sections .section:last-of-type img {
+  left: unset;
+  right: -100%;
 }
 .auth .sections .section a {
   font-size: 2.5rem;
