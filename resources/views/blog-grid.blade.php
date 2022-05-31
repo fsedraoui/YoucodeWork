@@ -8,8 +8,9 @@
 				<div class="container">
 					<div class="row align-items-center inner-banner">
 						<div class="col-md-12 col-12 text-center">
-							<h3 class="breadcrumb-title">Ce que les apprenats sont capable de faire</h3>
-
+							<h5 class="breadcrumb-title">Découvrir les compètences de nos apprenats via leurs réalisations et projets </h5>
+						<div class="search">
+							<div>
 							<span>
 										<i class="fa fa-filter"></i> 
 										
@@ -21,12 +22,17 @@
 
 
 										</span>
-
+									</div>
+										<div>
 										<form action="{{ route('projects') }}" method='POST'>
 											@csrf
-											<input type="text" name="keyword" />
-											<input type="submit" value="Search"/>
+											<div class="inputSearch">
+											<input class="form-control form-control-sm"  type="text" name="keyword" style=" margin-right: 5%;" />
+											<input class="btn btn-rounded btn-sm btn-warning" type="submit" value="Search"/>
+											</div>
 										</form>
+									</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -49,7 +55,9 @@
 								<div class="blog grid-blog">
 									<div class="blog-image">
 									
-										<a href="{{ route('project-details', $project->id) }}"><img class="img-fluid" src=" {{$project->lienImage1}}" alt="Post Image"></a>
+										<a href="{{ route('project-details', $project->id) }}"> <iframe src="https://youcode.ma/">
+											<p>Your browser does not support iframes.</p>
+									   </iframe></a>
 									</div>
 									<div class="blog-content">
 										<ul class="entry-meta meta-item">
@@ -62,13 +70,13 @@
 											{{ $project->created_at->format('d-m-Y')}}
 											</li>
 										</ul>
-										<h3 class="blog-title"><a href="blog-details">{{$project->name}}</a></h3>
+										<h3 class="blog-title"><a href="{{ route('project-details', $project->id) }}">{{$project->name}}</a></h3>
 										<p class="mb-0">{!! nl2br($project->excerpt(100)) !!}</p>
 
 										<span class="d-block m-2">
-										<h5>Technologies : </h5> 
+											<i class="fa-solid fa-laptop-mobile"></i>
 											@foreach($project->technologies as $technology) 
-											<label class="btn btn-rounded btn-sm btn-info tag">{{$technology}}</label>
+											<label class="btn btn-rounded btn-sm btn-info tag" style="border-color: #ffffff; !important">{{$technology}}</label>
 											
 											@endforeach
 

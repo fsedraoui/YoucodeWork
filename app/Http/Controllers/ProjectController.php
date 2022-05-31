@@ -7,18 +7,21 @@ use App\Models\Project;
 use App\Models\Student;
 use App\Models\Instructor;
 use App\Models\ProjectStudent;
+use App\Http\Controllers\InstructorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Http\Initialize;
 
 
 
 class ProjectController extends Controller
 {
-    //
+     
 
     public function create(){
 
+      
         $students = Student::all();
         $instructors = Instructor::all();
 
@@ -28,15 +31,17 @@ class ProjectController extends Controller
 
 
     public function store(Request $request){
-        $instructor = Instructor::where('email', $request->instructor)->first();
+       
+  
+       $instructor = Instructor::where('email', $request->instructor)->first();
 
         $project = new Project;
         $project->name = $request->name;
         $project->description = $request->description;
         $project->repoLink = $request->repoLink;
         $project->lienImage1 = $request->lienImage1;
-        $project->tags = json_encode( $request->technologies);
-        $project->technologies = json_encode(['golang','php']);
+        $project->tags = json_encode( $request->tags);
+        $project->technologies = json_encode($request->technologies);
         $project->authorId = Auth::user()->id;
         $project->status = 'PENDING';
         $project->instructor_id = $instructor->id;
@@ -157,5 +162,44 @@ class ProjectController extends Controller
 
     return view('project-details',compact("project","currentUser"));
     }
+
+
+    
+    public function validerProjectById($projectId){
+
+        $project = Project::find($projectId);
+        $project->status = 'ACCEPTED';
+        $project->save();
+        if(Auth::user()->role != 2){
+            return redirect('/redirectafterlogin');
+        }
+        
+        Initialize::user();
+
+        $user = Auth::user();
+
+            $instructor = Instructor::where('id_user', $user->id)->firstOrFail();
+           // Initialize::instructor($instructor);
+           return redirect('/redirectafterlogin');
+        //return view('admin.projects', compact('instructor','user'));
+    }
+
+
+    public function supprimerProjectById(Request $request){
+
+       // $project = ::destroy($);
+        Project::where('id',$request->projectId)->delete();
+     // var_dump("heloooooooo");
+        $user = Auth::user();
+        Initialize::user();
+        $instructor = Instructor::where('id_user', $user->id)->firstOrFail();
+        // Initialize::instructor($instructor);
+       // return redirect('/redirectafterlogin');
+        return redirect('/admin/projectsAdmin');
+     //return view('/admin.projects', compact('instructor','user'));
+    }
+
+
+
 
 }

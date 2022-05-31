@@ -120,14 +120,19 @@
 										<div class="flex-fill card">
 											<div class="pro-head b-0">	
 												<h5 class="card-title mb-0">Technologie & Tags</h5> 
+												
+
 											</div>
 											<div class="pro-body">									
 												<div id="chartradial"></div>
 												<ul class="static-list">
-													<li><span><i class="fas fa-circle text-violet me-1"></i> Applied Jobs</span> <span class="sta-count">30</span></li>
-													<li><span><i class="fas fa-circle text-pink me-1"></i> Active Proposals</span> <span class="sta-count">30</span></li>
-													<li><span><i class="fas fa-circle text-yellow me-1"></i> Applied Proposals</span> <span class="sta-count">30</span></li>
-													<li><span><i class="fas fa-circle text-blue me-1"></i> Bookmarked Projects</span> <span class="sta-count">30</span></li>
+													<?php $technologies = $technology_color_array ?>
+													@foreach ($technology_color_array as $technology)
+													{{-- {{ 'fas fa-circle text-'.(array_values($technology_color_array))[$i].' me-1'}}  --}}
+													<li><span><i class="fas fa-circle text-{{$technology[2]}} me-1"></i> {{$technology[0]}}</span> <span class="sta-count">{{$technology[1]}}</span></li>
+													
+													
+												@endforeach
 												</ul>
 											</div>
 										</div>
@@ -149,4 +154,8 @@
 
         </div>
 		<!-- /Main Wrapper -->
+		<script>
+			var technologies = @json($technologies);
+
+		</script>
 @endsection

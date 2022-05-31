@@ -45,12 +45,13 @@ class LoginRequest extends FormRequest
 
 
     public function login(){
-
-        $response = Http::post('http://admin.youcode.school/api/login', [
-            'email' => $this->email,
-            'password' => $this->password,
-        ]);
         
+        try {
+            $response = Http::post('http://admin.youcode.school/api/login', [
+                'email' => $this->email,
+                'password' => $this->password,
+            ]);
+
         
         if($response->successful() == 1){
             $body = json_decode($response->body(), true); 
@@ -118,6 +119,10 @@ class LoginRequest extends FormRequest
 
         }
 
+    } catch (\Throwable $th) {
+        echo 'error API login';
+        die;
+   }
 
     //     $client = new \GuzzleHttp\Client();
 
@@ -151,10 +156,13 @@ class LoginRequest extends FormRequest
     public function authenticate()
     {
 
+        if($this->role == 3)
+        {
+
 
         $this->ensureIsNotRateLimited();
-
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        
+        if (! Auth::attempt($this->only('email', 'password', 'role'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -163,6 +171,11 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+        }
+         else {
+            
+        }
+
     }
 
     /**

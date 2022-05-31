@@ -86,6 +86,7 @@
 											<div class="proposals-detail">
 												<h3 class="proposals-title"></h3>
 												<div class="proposals-content">
+													{{-- <img alt="Card Image" src="../assets_admin/img/img-01.jpg" class="card-img-top"> --}}
 													<div class="proposal-img">
 														<div class="text-md-center">
 														<h4>Validé par </h4>
@@ -102,13 +103,17 @@
 													<div class="proposal-img">
 													<div class="proposal-client">
 														<h4 class="title-info">Contributeurs</h4>
-														
-													@foreach($project->students as $student)
-													<div>{{$student->firstName}}</div>
-																													
-														@endforeach
+														<div class="card-body">
+															<div class="avatar-group">
+																@foreach($project->students as $student)
+																	<div class="avatar" style="a:hover { color: red; }" alt="{{$student->firstName}}">
+																		<img class="avatar-img rounded-circle border border-white"  src="../assets_admin/img/profiles/avatar-02.jpg"/>
+																		<div style="font-size: 7px;">{{$student->firstName}}</div>
+																	</div>																										
+																@endforeach
+															</div>
+												   		 </div>	
 													
-													   
 													</div>
 												</div>
 												</div>

@@ -19,8 +19,13 @@
 						<div class="col-lg-8 col-md-12">
 							<div class="blog-view">
 								<div class="blog-single-post pro-post widget-box">
-									<div class="blog-image">
-										<a href="javascript:void(0);"><img alt="" src="{{ $project->lienImage1}}" class="img-fluid"></a>
+									<div class="blog-image" >
+										<a href="javascript:void(0);">
+											<iframe src="https://youcode.ma/" style="height: 600px;">
+												<p>Your browser does not support iframes.</p>
+										   </iframe>
+											{{-- <img alt="" src="{{ $project->lienImage1}}" class="img-fluid"> --}}
+										</a>
 									</div>
 									
 									<div class="blog-info clearfix">

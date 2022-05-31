@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Job;
+use App\Models\Recruiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,6 +60,18 @@ class JobController extends Controller
         return view('view-jobs',compact("jobs","currentUser"));
 
     }
+
+    public function currentJobsbyRecruiter(){
+        
+        $currentUser = Auth::user();
+        $recruiter = Recruiter::where('id_user', $currentUser->id)->firstOrFail();
+
+        $jobs = Job::where('authorId', $recruiter->id)->paginate(4);
+        
+        return view('view-current-jobs',compact("jobs","currentUser"));
+        
+    }
+    
 
     // /**
     //  * Display the specified resource.

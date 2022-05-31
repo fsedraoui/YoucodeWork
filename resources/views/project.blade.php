@@ -492,6 +492,7 @@
 											<div class="freelancers-price">$42-$100</div>
 										</div>
 										<div class="counter-stats">
+											
 												<ul>
 													<li>
 														<h3 class="counter-value">1 Days Left</h3>

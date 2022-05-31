@@ -22,45 +22,7 @@
 										<p class="mb-0">@johndaniee</p>
 									</div>
 								</div>
-								<div class="settings-menu">
-									<ul>
-										<li class="nav-item">
-											<a href="freelancer-dashboard" class="nav-link active">
-												<i class="material-icons">verified_user</i> Dashboard
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-project-proposals" class="nav-link">Mes offres d'emploie encours
-												<i class="material-icons">business_center</i> 
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-favourites" class="nav-link">
-												<i class="material-icons">local_play</i> Mes offres d'emploie expirées
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-review" class="nav-link">
-												<i class="material-icons">record_voice_over</i> Tous mes offres d'emploie
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-portfolio" class="nav-link">
-												<i class="material-icons">pie_chart</i> Poster une nouvelle offre
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="freelancer-profile-settings" class="nav-link">
-												<i class="material-icons">settings</i>  Settings
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="index" class="nav-link">
-												<i class="material-icons">power_settings_new</i> Logout
-											</a>
-										</li>
-									</ul>
-								</div>
+								@include('layout.partials.sidebar_menu_recruiter')
 							</div>					
 						</div>	
 

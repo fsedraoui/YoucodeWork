@@ -1,4 +1,13 @@
 'use strict';
+var colors = []
+var technology_names = []
+var technology_count = []
+technologies.forEach(technology => {
+  colors.push(technology[3])  
+  technology_names.push(technology[0])  
+  technology_count.push(technology[1]*20)  //Pour agrandir l'echelle
+});
+console.log(colors)
 
 $(document).ready(function() {
 
@@ -18,7 +27,7 @@ $(document).ready(function() {
 	}
 
 	var options = {
-          series: [85, 75, 60, 40],
+          series: technology_count,
           chart: {		  
 		  toolbar: {
 			show: false
@@ -47,8 +56,11 @@ $(document).ready(function() {
             }
           }
         },
-        colors: ['#7B46BE', '#FA6CA4', '#FACD3A', '#24C0DC'],
-        labels: ['Applied Jobs', 'Messenger', 'Facebook', 'LinkedIn'],
+        //technology_color_array[0]=>
+       //colors : [$color_array_source[0],$color_array_source[1],$color_array_source[2]], 
+     
+       colors : colors,
+        labels: technology_names,
         legend: {
           show: false,
           floating: true,

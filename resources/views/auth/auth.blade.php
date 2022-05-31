@@ -5,15 +5,15 @@
     @php
         $sections = [
             [
-                "link" => "/login",
+                "link" => route('login-staff'),
                 "label"=> "Staff"
     ],
     [
-                "link" => "/recruiter",
+                "link" => route('loginR'),
                 "label"=> "Recruteur"
     ],
     [
-                "link" => "/apprenant",
+                "link" => route('login-student'),
                 "label"=> "Apprenant"
     ]
 ]

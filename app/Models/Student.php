@@ -11,6 +11,7 @@ class Student extends Model
 
 
     public function projects(){
+//photo à tester depuis Api
         return $this->belongsToMany(Project::class);
     }
 
