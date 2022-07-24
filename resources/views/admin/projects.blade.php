@@ -9,17 +9,12 @@
 					<div class="page-header">
 						<div class="row align-items-center">
 							<div class="col">
-								<h3 class="page-title">Projects</h3>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index_admin">Home</a></li>
-									<li class="breadcrumb-item active">Projects</li>
-								</ul>
+								<h3 class="page-title">Projets à traiter</h3>
+								<div class="col-auto">
+									
+								</div>
 							</div>
-							<div class="col-auto">
-								<a class="btn filter-btn" href="javascript:void(0);" id="filter_search">
-									<i class="fas fa-filter"></i>
-								</a>
-							</div>
+							
 						</div>
 					</div>
 					<!-- /Page Header -->
@@ -65,18 +60,18 @@
 					<div class="card bg-white projects-card">
 						<div class="card-body pt-0">
 							<div class="card-header">
-								<h5 class="card-title">Projects views</h5>
+								<h5 class="card-title">Projets détails</h5>
 							</div>
 							<div class="reviews-menu-links">
 								<ul role="tablist" class="nav nav-pills card-header-pills nav-justified">
 									<li class="nav-item">
-										<a href="#tab-4" data-bs-toggle="tab" class="nav-link active">All (272)</a>
+										<a href="#tab-4" data-bs-toggle="tab" class="nav-link active">Tous </a>
 									</li>
 									<li class="nav-item">
-										<a href="#tab-5" data-bs-toggle="tab" class="nav-link">Validés (218)</a>
+										<a href="#tab-5" data-bs-toggle="tab" class="nav-link">Validés </a>
 									</li>
 									<li class="nav-item">
-										<a href="#tab-6" data-bs-toggle="tab" class="nav-link"> En instance (03)
+										<a href="#tab-6" data-bs-toggle="tab" class="nav-link"> En instance 
 										</a>
 									</li>
 								</ul>
@@ -87,7 +82,7 @@
 										<table class="table table-center table-hover mb-0 datatable">
 											<thead>
 												<tr>
-													<th></th>
+													
 													<!-- <th>Avatar</th> -->
 													<th>Titre</th>	
 													<th>Date de création</th>	
@@ -95,26 +90,20 @@
 													<th>GitHub</th>	
 													<th>Collaborateurs</th>	
 													<th>Status</th>	
-													<th>Date Création</th>	
 													<th class="text-end">Actions</th>
 												</tr>
 											</thead>
 											<tbody>
 											@foreach($instructor->projects as $project)
 												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck1">
-														  <label class="form-check-label" for="customCheck1"></label>
-														</div>
-													</td>
+													
 													<!-- <td>
 														<h2 class="table-avatar">
 															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-1.png" alt="User Image"></a>
 														</h2>
 													</td> -->
 													
-													<td>{{$project->name}}</td>
+													<td>{{\Illuminate\Support\Str::limit($project->name , 15, $end='...')}}</td>
 													<td>
 													{{ \Carbon\Carbon::parse($project->created_at)->translatedFormat('j F, Y') }}
 													</td>
@@ -142,10 +131,14 @@
 														@if($project->status == 'ACCEPTED') <button type="button" class="btn btn-success btn-sm">Validé</button> @endif
 												
 												 </td>
-													<td>22-05-2022</td>
-													<td class="text-end">
+													<td  style="display: flex;">
 														@if($project->status == 'PENDING')<a href="{{ route('project-a-valide', $project->id) }}" class="btn btn-sm btn-success me-2"><i class="fa fa-check"></i></a>  @endif
-														<a href="{javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
+														<form action="{{ route('project-a-supprimer') }}" method="POST">	
+															@csrf
+														{{-- <a href="{{ route('project-a-supprimer', $project->id) }}" class="btn btn-primary continue-btn">Delete</a> --}}
+														<input type="hidden" name="projectId" id="projectId" value='{{$project->id}}'>
+														<button type="submit"  class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i>
+														</form>
 													</td>
 												</tr>
 												@endforeach
@@ -154,38 +147,31 @@
 									</div>
 								</div>
 								<div role="tabpanel" id="tab-5" class="tab-pane fade">
-									<<div class="table-responsive">
+									<div class="table-responsive">
 										<table class="table table-center table-hover mb-0 datatable">
 											<thead>
 												<tr>
-													<th></th>
-													<!-- <th>Avatar</th> -->
 													<th>Titre</th>	
 													<th>Date de création</th>	
 													<th>Date de Modification</th>	
 													<th>GitHub</th>	
 													<th>Collaborateurs</th>	
 													<th>Status</th>	
-													<th>Date Création</th>	
 													<th class="text-end">Actions</th>
 												</tr>
 											</thead>
 											<tbody>
 											@foreach($instructor->projects as $project)
+											@if($project->status == 'ACCEPTED') 
 												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck1">
-														  <label class="form-check-label" for="customCheck1"></label>
-														</div>
-													</td>
+													
 													<!-- <td>
 														<h2 class="table-avatar">
 															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-1.png" alt="User Image"></a>
 														</h2>
 													</td> -->
 													
-													<td>{{$project->name}}</td>
+													<td>{{\Illuminate\Support\Str::limit($project->name , 15, $end='...')}}</td>
 													<td>
 													{{ \Carbon\Carbon::parse($project->created_at)->translatedFormat('j F, Y') }}
 													</td>
@@ -213,12 +199,16 @@
 														@if($project->status == 'ACCEPTED') <button type="button" class="btn btn-success btn-sm">Validé</button> @endif
 												
 												 </td>
-													<td>22-05-2022</td>
-													<td class="text-end">
+												 <td  style="display: flex;">
 														@if($project->status == 'PENDING')<a href="{{ route('project-a-valide', $project->id) }}" class="btn btn-sm btn-success me-2"><i class="fa fa-check"></i></a>  @endif
-														<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
+														<form action="{{ route('project-a-supprimer', $project->id) }}" method="POST">	
+															@csrf
+														{{-- <a href="{{ route('project-a-supprimer', $project->id) }}" class="btn btn-primary continue-btn">Delete</a> --}}
+														<button type="submit"  class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i>
+														</form>
 													</td>
 												</tr>
+												@endif
 												@endforeach
 											</tbody>
 										</table>
@@ -229,7 +219,7 @@
 										<table class="table table-center table-hover mb-0 datatable">
 											<thead>
 												<tr>
-													<th></th>
+													
 													<!-- <th>Avatar</th> -->
 													<th>Titre</th>	
 													<th>Date de création</th>	
@@ -242,20 +232,16 @@
 											</thead>
 											<tbody>
 											@foreach($instructor->projects as $project)
-												<tr>
-													<td>
-														<div class="form-check form-checkbox">
-														  <input type="checkbox" class="form-check-input" id="customCheck1">
-														  <label class="form-check-label" for="customCheck1"></label>
-														</div>
-													</td>
+											@if($project->status == 'PENDING') 	
+											<tr>
+													
 													<!-- <td>
 														<h2 class="table-avatar">
 															<a href="profile"><img class="me-2" src="../assets_admin/img/company/img-1.png" alt="User Image"></a>
 														</h2>
 													</td> -->
 													
-													<td>{{$project->name}}</td>
+													<td>{{\Illuminate\Support\Str::limit($project->name , 15, $end='...')}}</td>
 													<td>
 													{{ \Carbon\Carbon::parse($project->created_at)->translatedFormat('j F, Y') }}
 													</td>
@@ -284,7 +270,7 @@
 												
 												 </td>
 													
-													<td class="text-end">
+												 <td  style="display: flex;">
 														@if($project->status == 'PENDING')<a href="{{ route('project-a-valide', $project->id) }}" class="btn btn-sm btn-success me-2"><i class="fa fa-check"></i></a>  @endif
 														<form action="{{ route('project-a-supprimer', $project->id) }}" method="POST">	
 															@csrf
@@ -294,6 +280,7 @@
 														{{-- <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
 													 --}}</td>
 												</tr>
+												@endif
 												@endforeach
 											</tbody>
 										</table>
@@ -365,20 +352,20 @@
 				<div class="modal-content">
 					<div class="modal-body">
 						<div class="form-header">
-							<h3>Delete</h3>
-							<p>Are you sure want to delete?</p>
+							<h3>Supprimer</h3>
+							<p>êtes vous sûr?</p>
 						</div>
 						<div class="modal-btn delete-action">
 							<div class="row">
 								<div class="col-6">
 									<form action="{{ route('project-a-supprimer', $project->id) }}" method="POST">	
 										@csrf
-									{{-- <a href="{{ route('project-a-supprimer', $project->id) }}" class="btn btn-primary continue-btn">Delete</a> --}}
+									<a href="{{ route('project-a-supprimer', $project->id) }}" class="btn btn-primary continue-btn">Delete</a>
 									<button type="submit" class="btn btn-primary continue-btn">Supprimer</button>
 									</form>
 								</div>
 								<div class="col-6">
-									<a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+									<a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn" style="color: black">Annuler</a>
 								</div>
 							</div>
 						</div>

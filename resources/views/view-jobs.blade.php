@@ -23,12 +23,12 @@
 								<div class="settings-menu">
 									<ul>
 										<li class="nav-item">
-											<a href="dashboard" class="nav-link active">
+											<a href="dashboard" class="nav-link">
 												<i class="material-icons">verified_user</i> Tableau de bord
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="view-jobs" class="nav-link">
+											<a href="view-jobs" class="nav-link active">
 												<i class="material-icons">business_center</i> Postulez pour une offre
 											</a>
 										</li>
@@ -75,8 +75,8 @@
 									</div>
 								</div>
 							</div>
-							@if ($jobs->count())
-       						     @foreach ($jobs as $job)	
+							{{-- @if ($jobs->count())
+       						     @foreach ($jobs as $job)	 --}}
 							
 							<!-- project list -->
 							<div class="my-projects-list">
@@ -84,9 +84,11 @@
 									<div class="col-lg-10 flex-wrap">
 										<div class="projects-card flex-fill">
 											<div class="card-body">
-												<div class="projects-details align-items-center">
+												{{-- <div class="projects-details align-items-center">
 													<div class="project-info">
-														<span>{{$job->position}}</span>
+														@if ($job->recruiter != null)
+														<span>{{$job->recruiter->company}}</span>
+														@endif
 														<h2>{{$job->position}}</h2>
 														<div class="customer-info">
 															<ul class="list-details">
@@ -122,12 +124,239 @@
 														<div class="content-divider"></div>
 														<div class="projects-amount">
 															<h3>Envoyez votre Cv sur</h3>
-															<h5>{{$job->emailCvs}}<</h5>
+															<h5>{{$job->emailCvs}}</h5>
 														</div>
 														<div class="content-divider"></div>
 														<div class="projects-action text-center">
-															<a href="view-project-detail" class="projects-btn">View Details </a>
-															<a href="#" class="hired-detail">Hired on 19 JUN 2021</a>
+															<a href="view-project-detail" class="projects-btn">Voir plus </a>
+															<a href="#" class="hired-detail">crée le {{ \Carbon\Carbon::parse($job->created_at)->translatedFormat('j F, Y') }}</a>
+														</div>
+													</div>
+												</div> --}}
+												
+												<div class="projects-details align-items-center">
+													<div class="project-info">
+													
+														<span>Capgemini</span>
+														
+														<h2>Développeur Full Stack</h2>
+														<div class="customer-info">
+															<ul class="list-details">
+																<li>
+																	<div class="slot">
+																		<p>Type Contrat</p>
+																		<h5>CDI</h5>
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Is remonte</p>
+																		<h5> Remote</h5>
+																		
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Date d'éxpiration</p>
+																		
+
+																		<h5> 20-01-2022</h5>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<div class="project-hire-info">
+														<div class="content-divider"></div>
+														<div class="projects-amount">
+															<h3>Envoyez votre Cv sur</h3>
+															<h5>recrutement@entreprise.com</h5>
+														</div>
+														<div class="content-divider"></div>
+														<div class="projects-action text-center">
+															<a href="view-project-detail" class="projects-btn">Voir plus </a>
+															<a href="#" class="hired-detail">crée le 20-01-2022</a>
+														</div>
+													</div>
+												</div>
+												<div class="projects-details align-items-center">
+													<div class="project-info">
+													
+														<span>Capgemini</span>
+														
+														<h2>Développeur php</h2>
+														<div class="customer-info">
+															<ul class="list-details">
+																<li>
+																	<div class="slot">
+																		<p>Type Contrat</p>
+																		<h5>CDI</h5>
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Is remonte</p>
+																		<h5> Remote</h5>
+																		
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Date d'éxpiration</p>
+																		
+
+																		<h5> 20-01-2022</h5>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<div class="project-hire-info">
+														<div class="content-divider"></div>
+														<div class="projects-amount">
+															<h3>Envoyez votre Cv sur</h3>
+															<h5>recrutement@entreprise.com</h5>
+														</div>
+														<div class="content-divider"></div>
+														<div class="projects-action text-center">
+															<a href="view-project-detail" class="projects-btn">Voir plus </a>
+															<a href="#" class="hired-detail">crée le 20-01-2022</a>
+														</div>
+													</div>
+												</div>
+												<div class="projects-details align-items-center">
+													<div class="project-info">
+													
+														<span>Cegedim</span>
+														
+														<h2>Intégrateur Web </h2>
+														<div class="customer-info">
+															<ul class="list-details">
+																<li>
+																	<div class="slot">
+																		<p>Type Contrat</p>
+																		<h5>CDI</h5>
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Is remonte</p>
+																		<h5> Remote</h5>
+																		
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Date d'éxpiration</p>
+																		
+
+																		<h5> 20-01-2022</h5>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<div class="project-hire-info">
+														<div class="content-divider"></div>
+														<div class="projects-amount">
+															<h3>Envoyez votre Cv sur</h3>
+															<h5>recrutement@entreprise.com</h5>
+														</div>
+														<div class="content-divider"></div>
+														<div class="projects-action text-center">
+															<a href="view-project-detail" class="projects-btn">Voir plus </a>
+															<a href="#" class="hired-detail">crée le 20-01-2022</a>
+														</div>
+													</div>
+												</div>
+												<div class="projects-details align-items-center">
+													<div class="project-info">
+													
+														<span>Capgemini</span>
+														
+														<h2>Développeur java</h2>
+														<div class="customer-info">
+															<ul class="list-details">
+																<li>
+																	<div class="slot">
+																		<p>Type Contrat</p>
+																		<h5>CDI</h5>
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Is remonte</p>
+																		<h5> Remote</h5>
+																		
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Date d'éxpiration</p>
+																		
+
+																		<h5> 20-01-2022</h5>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<div class="project-hire-info">
+														<div class="content-divider"></div>
+														<div class="projects-amount">
+															<h3>Envoyez votre Cv sur</h3>
+															<h5>recrutement@entreprise.com</h5>
+														</div>
+														<div class="content-divider"></div>
+														<div class="projects-action text-center">
+															<a href="view-project-detail" class="projects-btn">Voir plus </a>
+															<a href="#" class="hired-detail">crée le 20-01-2022</a>
+														</div>
+													</div>
+												</div>
+											
+												<div class="projects-details align-items-center">
+													<div class="project-info">
+													
+														<span>Cegedim</span>
+														
+														<h2>Développeur React</h2>
+														<div class="customer-info">
+															<ul class="list-details">
+																<li>
+																	<div class="slot">
+																		<p>Type Contrat</p>
+																		<h5>CDI</h5>
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Is remonte</p>
+																		<h5> Remote</h5>
+																		
+																	</div>
+																</li>
+																<li>
+																	<div class="slot">
+																		<p>Date d'éxpiration</p>
+																		
+
+																		<h5> 20-01-2022</h5>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<div class="project-hire-info">
+														<div class="content-divider"></div>
+														<div class="projects-amount">
+															<h3>Envoyez votre Cv sur</h3>
+															<h5>recrutement@entreprise.com</h5>
+														</div>
+														<div class="content-divider"></div>
+														<div class="projects-action text-center">
+															<a href="view-project-detail" class="projects-btn">Voir plus </a>
+															<a href="#" class="hired-detail">crée le 20-01-2022</a>
 														</div>
 													</div>
 												</div>
@@ -137,16 +366,16 @@
 								
 								</div>
 							</div>
-							@endforeach
+							{{-- @endforeach
 									
 									@else
 									<p>There are no posts</p>
-									@endif
+									@endif --}}
 						
 	
 							<!-- /project list -->
 							<!-- pagination -->
-							<div class="row">
+							{{-- <div class="row">
 								<div class="col-md-12">
 									<ul class="paginations list-pagination">
 										<li><a 	
@@ -171,7 +400,7 @@
 										> <i class="fas fa-angle-right"></i></a></li>
 									</ul>
 								</div>
-							</div>
+							</div> --}}
 
 							<!-- /pagination -->
 							

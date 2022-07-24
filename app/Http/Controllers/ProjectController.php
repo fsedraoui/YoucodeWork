@@ -36,9 +36,17 @@ class ProjectController extends Controller
        $instructor = Instructor::where('email', $request->instructor)->first();
 
         $project = new Project;
+       if( isset($_POST["idProjet"]))
+        {
+            $project = Project::find($_POST["idProjet"]);
+            $project->students()->detach();
+        }
+        
+        
         $project->name = $request->name;
         $project->description = $request->description;
         $project->repoLink = $request->repoLink;
+        $project->liensite = $request->liensite;
         $project->lienImage1 = $request->lienImage1;
         $project->tags = json_encode( $request->tags);
         $project->technologies = json_encode($request->technologies);
@@ -46,19 +54,27 @@ class ProjectController extends Controller
         $project->status = 'PENDING';
         $project->instructor_id = $instructor->id;
 
+        $user = Auth::user();
 
+        $studentConnecte = Student::where('id_user', $user->id)->firstOrFail();
 
-        
+       
 
         if ($project->save()) {
-
+            $idsProjets = [];
+            array_push( $idsProjets,$studentConnecte->id);
             foreach($request->contributors as $contributor_email){
                 $student = Student::where('email', $contributor_email)->first();
     
-                $project->students()->attach($student);        
-    
+                //$project->students()->syncWithoutDetaching($student); 
+              
+                array_push($idsProjets,$student->id);
+               
     
             }
+            $idsProjets = array_unique($idsProjets);
+
+            $project->students()->attach($idsProjets);        
             
         }
 
@@ -72,16 +88,18 @@ class ProjectController extends Controller
 //all project
     public function allProjects(Request $request){
         
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $projects = Project::where('name', 'LIKE', '%'. $request->keyword .'%')
+        if($_SERVER['REQUEST_METHOD'] == 'POST' &&  $request->keyword !='' &&  $request->keyword != null && !empty($request->keyword)){
+            $projects = Project::where('status', 'LIKE', 'ACCEPTED')
+                                ->where('name', 'LIKE', '%'. $request->keyword .'%')
                                 ->orWhere('description', 'LIKE', '%'. $request->keyword .'%')
                                 ->orWhere('technologies', 'LIKE', '%'. $request->keyword .'%')
                                 ->orWhere('tags', 'LIKE', '%'. $request->keyword .'%')
-                                ->get();
+                                ->paginate(20);
+                                // 
 
 
         } else {
-            $projects = Project::all();
+            $projects = Project::where('status', 'LIKE', 'ACCEPTED')->paginate(20);
 
         }
 
@@ -107,11 +125,11 @@ class ProjectController extends Controller
     public function projectsByTechnology($technology){
 
 
-            $projects = Project::where('technologies', 'like', '%'.$technology.'%')->get();
+            $projects = Project::where('technologies', 'like', '%'.$technology.'%')->paginate(20);
 
             $allTechnologies = [];
 
-            $allProjects = Project::all();
+            $allProjects = Project::where('status', 'LIKE', 'ACCEPTED')->paginate(20);
 
 
        foreach ($projects as $project) {
@@ -164,6 +182,32 @@ class ProjectController extends Controller
     }
 
 
+    public function projectUpdateById(Request $request){
+
+        $project = Project::find($request->idProjet);
+        
+     /*   $allTechnologies = [];
+
+        if( $project != null)
+     {   
+        $tags = trim($project->tags,'"');
+        $tags = explode(',', $tags);
+        $project->tags = $tags;
+        $technologies = trim($project->technologies,'"');
+        $technologies = explode(',', $technologies);
+        $project->technologies = $technologies;  
+        
+    }*/
+
+    //$currentUser = Auth::user();
+    $students = Student::all();
+    $instructors = Instructor::all();
+
+    return view('post-project', compact('project','students', 'instructors'));
+    //return view('project-details',compact("project","currentUser"));
+    }
+
+
     
     public function validerProjectById($projectId){
 
@@ -186,9 +230,14 @@ class ProjectController extends Controller
 
 
     public function supprimerProjectById(Request $request){
+   
 
-       // $project = ::destroy($);
-        Project::where('id',$request->projectId)->delete();
+     if( isset($_POST["projectId"]))
+     {
+       
+        Project::destroy($_POST["projectId"]);
+     }
+       // Project::where('id',$request->projectId)->delete();
      // var_dump("heloooooooo");
         $user = Auth::user();
         Initialize::user();

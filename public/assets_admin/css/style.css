@@ -265,7 +265,7 @@ p:last-child{
 	color: #fff;
 }
 .table-btn:hover {
-	background: #DD4B39;
+	background: #000000;
     color: #fff;
 }
 .btn-blue {
@@ -447,7 +447,7 @@ div.dataTables_wrapper div.dataTables_length select {
 	font-size: 22px;
 }
 .bg-1 {
-	background: #FFB8A8;
+	background: #ffffff;
 }
 .bg-1 i {
 	color: #3488da;
@@ -1130,7 +1130,7 @@ button.bg-danger:hover {
 	transition: all 0.3s ease-out;
 }
 .zone .btnCompression .active {
-	background: #EB6A5A;
+	background: #000000;
 	color: white;
 }
 .zone i {
@@ -1174,11 +1174,11 @@ button.bg-danger:hover {
 	border: 2px dashed gray;
 }
 .zone.hover i {
- 	color: #EB6A5A;
+ 	color: #000000;
 }
 .zone.hover label {
 	background: #fff;
-	color: #EB6A5A;
+	color: #000000;
 }
 .zone.fade {
 	transition: all 0.3s ease-out;
@@ -3456,7 +3456,7 @@ table.table-inbox tbody tr.checked {
     padding: 10px 12px;
 }
 .btn-google {
-    background-color: #dd4b39;
+    background-color: #000000;
 	border-radius: 165px;
     color: #fff;
     font-size: 14px;
@@ -4011,7 +4011,7 @@ table.table-inbox tbody tr.checked {
 .wizard-icon {
 	padding: 40px;
 	border-radius: 50%;
-	background: #FFB8A8;
+	background: #FFF;
 	position: absolute; 
 	bottom: -27px;
 	right: -27px;
@@ -4032,6 +4032,7 @@ table.table-inbox tbody tr.checked {
     bottom: -15px;
     right: -10px;
 	z-index: -1;
+	background: #00000014;
 }
 .welcome-dash-icon {
 	align-items: center;

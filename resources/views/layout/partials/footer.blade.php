@@ -1,8 +1,5 @@
 <!-- Footer -->	
 			<footer class="footer">
-				<div class="footer-top">
-					
-				</div>
 				<!-- /Footer Top -->
 				
 				<!-- Footer Bottom -->
@@ -14,7 +11,7 @@
 							<div class="row">
 								<div class="col-md-6 col-lg-6">
 									<div class="copyright-text">
-										<p class="mb-0">&copy; 2021 All Rights Reserved</p>
+										<p class="mb-0">&copy; 2022 tous les droits sont réservées</p>
 									</div>
 								</div>
 								<div class="col-md-6 col-lg-6 right-text">
@@ -23,6 +20,7 @@
 											<li><a href="#" class="icon" target="_blank"><i class="fab fa-instagram"></i> </a></li>
 											<li><a href="#" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
 											<li><a href="#" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
+											<li><a href="#" class="icon" target="_blank"><i class="fab fa-facebook"></i> </a></li>
 										</ul>
 									</div>
 								</div>

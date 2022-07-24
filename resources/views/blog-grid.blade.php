@@ -16,7 +16,7 @@
 										
 										<a href="{{ route('projects') }}" class="btn btn-rounded btn-sm btn-warning"><i class="fas fa-minus"></i> </a>
 											@foreach($allTechnologies as $technology) 
-											<a href="{{ route('projects-by-technology', $technology) }}" class="btn btn-rounded btn-sm btn-light">{{$technology}}</a>
+											<a href="{{ route('projects-by-technology', $technology) }}" class="btn btn-rounded btn-sm btn-light">{{strtoupper($technology)}}</a>
 											
 											@endforeach
 
@@ -54,18 +54,29 @@
 								<!-- Blog Post -->
 								<div class="blog grid-blog">
 									<div class="blog-image">
+										<a href="{{ route('project-details', $project->id) }}"><img style="    max-height: 240PX; min-height: 240PX;" class="img-fluid" src=" {{$project->lienImage1}}" alt="Post Image"></a>
 									
-										<a href="{{ route('project-details', $project->id) }}"> <iframe src="https://youcode.ma/">
+										{{-- <a href="{{ route('project-details', $project->id) }}"> <iframe src="https://youcode.ma/">
 											<p>Your browser does not support iframes.</p>
-									   </iframe></a>
+									   </iframe></a> --}}
 									</div>
 									<div class="blog-content">
 										<ul class="entry-meta meta-item">
-											<li>
-												<div class="post-author">
-													<a href="developer-details"><img src="assets/img/img-03.jpg" alt="Post Author">{{$project->authorId}} <span></span></a>
-												</div>
-											</li>
+											
+												
+													<div class="card-body">
+														<div class="avatar-group">
+															@foreach($project->students as $student)
+																<div class="avatar" style="a:hover { color: red; }" alt="{{$student->firstName}}">
+																	<img class="avatar-img rounded-circle border border-white"  src="../assets_admin/img/profiles/avatar-02.jpg"/>
+																	<div style="font-size: 7px;">{{$student->firstName}}</div>
+																</div>																										
+															@endforeach
+														</div>
+														</div>	
+													{{-- <a href="developer-details"><img src="assets/img/img-03.jpg" alt="Post Author">{{$project->name}}{{$project->authorId}} <span></span></a> --}}
+												
+											
 											<li><i class="far fa-clock"></i> 
 											{{ $project->created_at->format('d-m-Y')}}
 											</li>
@@ -108,7 +119,7 @@
 								</div>
 								
 							<!-- Blog Pagination -->
-							<div class="row pb-4">
+							{{-- <div class="row pb-4">
 								<div class="col-md-12">
 									<div class="blog-pagination text-center">
 										<ul class="paginations">
@@ -121,7 +132,35 @@
 										</ul>
 									</div>
 								</div>
+							</div> --}}
+
+							<div class="row">
+								<div class="col-md-12">
+									<ul class="paginations list-pagination">
+										<li><a 	
+											@if($projects->currentPage() != 1)
+												href={{ route('projects', ['page' => 1]) }}
+											@endif
+										><i class="fas fa-angle-left"></i></a></li>
+										@for($i=1;$i< ($projects->total()/$projects->perPage())+1 ;$i++)
+											<li><a 
+											@if($i ==  $projects->currentPage())
+												class="active"
+											@else 
+												href={{ route('projects', ['page' => $i]) }}
+											@endif
+											>{{$i}}</a></li>
+
+										@endfor
+										<li><a 
+											@if($projects->currentPage() != $projects->lastPage())
+												href={{ route('projects', ['page' => $projects->lastPage()]) }}
+											@endif
+										> <i class="fas fa-angle-right"></i></a></li>
+									</ul>
+								</div>
 							</div>
+
 							<!-- /Blog Pagination -->
 							
 						</div>

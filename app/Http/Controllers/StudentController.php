@@ -9,26 +9,29 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+
+use Illuminate\Validation\ValidationException;
 use DB;
 
 class StudentController extends Controller
 {
     public function Role(){
+        try{
             if(Auth::user()->role == 1 ){
 
-                return redirect('/dashboard');
+                return redirect('/projects');
     
             } else if(Auth::user()->role == 2){
                 //TODO 
-                return redirect('/admin/projectsAdmin');
-                echo 'this is trainer';
+                return redirect('/projects');
             } else if(Auth::user()->role == 3){
-                //TODO
-                // return redirect('/dashboard-recruiter');
-                return redirect('/freelancer-dashboard');
-            }
-
-
+                return redirect('/projects');
+            }else
+            return redirect('/auth');
+        }catch(\Throwable $t) 
+       { 
+           return redirect('/auth');
+       }
 
 
 
@@ -42,9 +45,9 @@ class StudentController extends Controller
     // } 
    }
    public function projetByStudent(){
-        if(Auth::user()->role != 1){
+       /*  if(Auth::user()->role != 1){
             return redirect('/redirectafterlogin');
-        }
+        } */
         
         Initialize::user();
 
@@ -54,40 +57,119 @@ class StudentController extends Controller
             Initialize::student($student);
         return view('freelancer-project-proposals', compact('student','user'));
 }
+ 
+
+
+public function  allStudents(){
+    if(Auth::user()->role != 2){
+        return redirect('/redirectafterlogin');
+    }
     
+    Initialize::user();
 
+    $user = Auth::user();
 
-public function DashboardApprenant(){
+        $students = Student::all();
+    return view('/admin/users', compact('students','user'));
+}
 
-        if(Auth::user()->role != 1){
-            return redirect('/redirectafterlogin');
+public function  allDashAdmin(){
+    if(Auth::user()->role != 2){
+        return redirect('/redirectafterlogin');
+    }
+    
+    Initialize::user();
+
+    $user = Auth::user();
+
+        $students = Student::all();
+        $projects = Project::all();
+        $studentsCount =  $students->count();
+        $projetValideCount = 0;
+        $projetAllCount = $projects->count();
+        $projetInstanceCount = 0;
+        $allTechnologiesStudent = [];
+        $allTagsStudent = [];
+
+        foreach ($projects as $project) {
+            if($project->status == 'ACCEPTED')
+                $projetValideCount++;
+           else if($project->status == 'PENDING')
+                 $projetInstanceCount++;
         }
-        
-        Initialize::user();
+
+    return view('/admin/index_admin', compact('studentsCount','projetValideCount','projetInstanceCount','projetAllCount','user'));
+}
 
 
+public function projetEnInstanceByStudent(){
+    if(Auth::user()->role != 1){
+        return redirect('/redirectafterlogin');
+    }
+    
+    Initialize::user();
 
-       
-        $user = Auth::user();
+    $user = Auth::user();
 
         $student = Student::where('id_user', $user->id)->firstOrFail();
         Initialize::student($student);
+    return view('enInstance-project-proposals', compact('student','user'));
+}
+
+
+public function DashboardApprenant(Request $request){
+
+     /*    if(Auth::user()->role != 1 || Auth::user()->role != 2){
+            return redirect('/redirectafterlogin');
+        }
+         */
+        Initialize::user();
+
         
+
+       
+        $user = Auth::user();
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $student = Student::where('id',$request->idApp )->firstOrFail();
+            Initialize::student($student);
+        }
+        else 
+            { 
+                $student = Student::where('id_user',  $user->id )->firstOrFail();
+                Initialize::student($student);
+            }
+        $projetValideCount = 0;
+        $projetInstanceCount = 0;
         $allTechnologiesStudent = [];
+        $allTagsStudent = [];
+        $allTags  = [];
 
         foreach ($student->projects as $project) {
+            if($project->status == 'ACCEPTED')
+                $projetValideCount++;
+           else if($project->status == 'PENDING')
+                 $projetInstanceCount++;
 
-        $tags = trim($project->tags,'"');
-        $tags = explode(',', $tags);
-        $project->tags = $tags;
-        $technologies = trim($project->technologies,'"');
-        $technologies = explode(',', $technologies);
-        $project->technologies = $technologies;  
-        foreach($technologies as $technology){
-            array_push($allTechnologiesStudent, strtoupper($technology));    
+        if($project->status == 'ACCEPTED')        
+       {
+            $tags = trim($project->tags,'"');
+            $tags = explode(',', $tags);
+            $project->tags = $tags;
+            $technologies = trim($project->technologies,'"');
+            $technologies = explode(',', $technologies);
+            $project->technologies = $technologies;  
+            foreach($technologies as $technology){
+                array_push($allTechnologiesStudent, strtoupper($technology));    
 
-        }
+            }
+            foreach($tags as $tag){
+                array_push($allTagsStudent, strtoupper($tag));    
+
+            }
+       }
+        $allTags = array_unique($allTagsStudent);
         $allTechnologies = array_unique($allTechnologiesStudent);
+        
     }
 
     $technology_count_values = array_count_values($allTechnologiesStudent);
@@ -126,9 +208,10 @@ public function DashboardApprenant(){
 
     }
 
+    $student-> projetValideCount =  $projetValideCount;
+    $student-> projetInstanceCount =  $projetInstanceCount;
 
-
-    return view('dashboard',compact("user", "student", "allTechnologiesStudent", "technology_color_array"));
+    return view('dashboard',compact("user", "student", "allTechnologiesStudent","allTags", "technology_color_array"));
 }
 
 /*public function projectsByTechnology($technology){

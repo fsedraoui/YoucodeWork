@@ -20,7 +20,7 @@
 								<div class="settings-menu">
 									<ul>
 										<li class="nav-item">
-											<a href="dashboard" class="nav-link active">
+											<a href="dashboard" class="nav-link">
 												<i class="material-icons">verified_user</i> Tableau de bord
 											</a>
 										</li>
@@ -31,7 +31,7 @@
 										</li>
 										
 										<li class="nav-item">
-											<a href="apprenant-projetsvalides" class="nav-link">
+											<a href="apprenant-projetsvalides" class="nav-link active">
 												<i class="material-icons">record_voice_over</i> Mes projets
 											</a>
 										</li>
@@ -40,11 +40,11 @@
 												<i class="material-icons">local_play</i> Explorer des Projets
 											</a>
 										</li>
-										<li class="nav-item">
+										{{-- <li class="nav-item">
 											<a href="freelancer-chats" class="nav-link">
 												<i class="material-icons">chat</i> techno & Skils
 											</a>
-										</li>
+										</li> --}}
 										<li class="nav-item">
 											<a href="freelancer-profile-settings" class="nav-link">
 												<i class="material-icons">settings</i>  Settings
@@ -69,7 +69,7 @@
 										<a class="nav-link active" href="apprenant-projetsvalides">Projets validés</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="apprenant-projetsvalides">Projets en instance</a>
+										<a class="nav-link" href="projetsenInstance">Projets en instance</a>
 									</li>
 								</ul>
 							</nav> 
@@ -80,27 +80,23 @@
 								@if ($student->projects->count())
 								@foreach($student->projects as $project)
 								<!-- Projet -->
-								<div class="freelancer-proposals">
+								@if($project->status == 'ACCEPTED')
+								<div class="freelancer-proposals" style="border: solid 0.2px #e7e3f1;">
 									<div class="">
 										<div class="proposals-info">
 											<div class="proposals-detail">
 												<h3 class="proposals-title"></h3>
 												<div class="proposals-content">
 													{{-- <img alt="Card Image" src="../assets_admin/img/img-01.jpg" class="card-img-top"> --}}
-													<div class="proposal-img">
-														<div class="text-md-center">
-														<h4>Validé par </h4>
-															<h4>{{ $project->instructor->firstName}}</h4>
-															<span class="info-btn" style="background: #9bc0ed52 !important; color: #212529;">Validé</span>
-														</div>
-													</div>
+													
 													<div class="proposal-client">
 														<h4 class="title-info" style="color:#1c66b6; ">{{ $project->name}}</h4>
 														<i class="far fa-clock"></i> 
-														{{ $project->created_at->format('d-m-Y')}}
+														{{ $project->created_at->format('d M Y')}}
+														
 														
 													</div>
-													<div class="proposal-img">
+													
 													<div class="proposal-client">
 														<h4 class="title-info">Contributeurs</h4>
 														<div class="card-body">
@@ -115,14 +111,27 @@
 												   		 </div>	
 													
 													</div>
+												{{-- <div class="proposal-img">
+													<img alt="" src="{{ $project->lienImage1}}" class="img-fluid">
+												</div> --}}
+												
+												
+												<div class="proposal-img">
+													<div class="text-md-center">
+													<h4>Coach</h4>
+														<h4>{{ $project->instructor->firstName}}</h4>
+														<span class="info-btn" style="background: #9bc0ed52 !important; color: #212529;">Validé</span>
+													</div>
 												</div>
 												</div>
+
+												
 											</div>
 
 										
-											<div class="proposal-type">
+											{{-- <div class="proposal-type">
 													  
-											 </div>
+											 </div> --}}
 											<div class="project-hire-info">
 												<div class="content-divider-1"></div>
 												<div class="projects-amount">
@@ -144,6 +153,7 @@
 										</div>
 									</div>
 								</div>
+								@endif
 								<!-- Proposals --> 
 								
 								@endforeach

@@ -10,6 +10,6 @@ class Job extends Model
     use HasFactory;
 
     public function recruiter(){
-        return $this->belongsTo(Recruiter::class);
+        return $this->belongsTo(Recruiter::class,'authorId');
     }  
 }

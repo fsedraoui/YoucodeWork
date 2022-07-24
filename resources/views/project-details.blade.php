@@ -6,7 +6,7 @@
 <!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
 				<div class="container">
-					<div class="row align-items-center inner-banner">
+					<div class="row align-items-center inner-banner" style="padding: 20PX !important;">
 					</div>
 				</div>
 			</div>
@@ -21,7 +21,7 @@
 								<div class="blog-single-post pro-post widget-box">
 									<div class="blog-image" >
 										<a href="javascript:void(0);">
-											<iframe src="https://youcode.ma/" style="height: 600px;">
+											<iframe src="https://{{$project->liensite}}/" style="height: 700px;">
 												<p>Your browser does not support iframes.</p>
 										   </iframe>
 											{{-- <img alt="" src="{{ $project->lienImage1}}" class="img-fluid"> --}}
@@ -35,9 +35,16 @@
 										<h3 class="blog-title">{{ $project->name }}</h3>	
 										<ul>
 												<li> 
-													<div class="post-author">
-														<a href="developer-details"><img src="assets/img/img-02.jpg" alt="Post Author"><span>John Doe</span></a>
-													</div>
+													<div class="card-body">
+														<div class="avatar-group">
+															@foreach($project->students as $student)
+																<div class="avatar" style="a:hover { color: red; }" alt="{{$student->firstName}}">
+																	<img class="avatar-img rounded-circle border border-white"  src="../assets_admin/img/profiles/avatar-02.jpg"/>
+																	<div style="font-size: 7px;">{{$student->firstName}}</div>
+																</div>																										
+															@endforeach
+														</div>
+														</div>	
 												</li>
 												<li><a href="#"><i class="far fa-calendar"></i>{{ $project->created_at->format('d M Y')}}</a></li>
 												<li>
@@ -94,8 +101,7 @@
 								<div class="pro-content">
 									<div class="tags">
 									<i class="fa fa-location-arrow"></i>
-											<a href="developer-details">{{$project->repoLink}} </a>
-											
+											<a href="{{url("www.".$project->liensite)}}"  target="_blank">{{ "www.".$project->liensite }} </a> 
 									</div>
 								</div>
 							</div>
@@ -106,7 +112,7 @@
 								<div class="pro-content">
 									<div class="tags">
 									<i class="fab fa-github"></i>
-											<a href="developer-details">{{$project->repoLink}} </a>
+											<a href="{{ "www.".$project->repoLink}}"  target="_blank">{{ "www.".$project->repoLink}} </a>
 											
 									</div>
 								</div>
@@ -114,7 +120,7 @@
 							
 							<div class="pro-post author-widget clearfix">
 									<div class="widget-title-box clearfix">
-										<h3 class="pro-title">team de Dev</h3>
+										<h3 class="pro-title">Team de Dév.</h3>
 									</div>
 									@foreach($project->students as $student)
 											
@@ -126,13 +132,11 @@
 											</div>
 										</div>
 										<div class="author-details">
-											<a href="developer-details" class="blog-author-name">{{$student->firstName}} </a>
+											<a href="developer-details" class="tags">{{$student->firstName}} </a>
 											<div class="social-links">
 												<ul>
 													<li><a href="#"><i class="fab fa-github"></i></a></li>
-													<li><a href="#"><i class="fab fa-dribbble"></i></a></li>
 													<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-													<li><a href="#"><i class="fab fa-twitter"></i></a></li>
 													<i class=""></i>
 												</ul>
 											</div>

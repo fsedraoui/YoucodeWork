@@ -1751,7 +1751,7 @@ label {
     clear: both;
     white-space: nowrap;
     font-size: 16px;
-    color: #2d3b48;
+    color: #000000;
     -webkit-transition: all .35s ease;
     transition: all .35s ease;
 	width: 100%;
@@ -2186,27 +2186,27 @@ background-color: white;
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	background-color: #fff4f0;
+	background-color: #d9dcdf;
     height: 60px;
     padding:  0 20px;
 	justify-content: space-between;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: space-between;
-    border-bottom: 1px solid #f7d0c6;
+    border-bottom: 1px solid #ffffff;
 	display: none;
 }
 .menu-close {
 	font-size: 18px;
 }
 .menu-close i {
-	color: #f38244;
+	color: #000000;
 }
 .bar-icon {
     display: inline-block;
     width: 31px;
 }
 .bar-icon span {
-    background-color: #ee6c2f;
+    background-color: #000000;
     display: block;
     float: left;
     height: 3px;
@@ -9514,6 +9514,7 @@ label.award-upload input[type="file"] {
 .text-blue {
 	color: #24C0DC;
 }
+
 .static-list {
 	list-style: none;
     margin: 0;
@@ -9696,7 +9697,7 @@ label.award-upload input[type="file"] {
     margin: 0 auto 10px;
 }
 .projects-btn:hover {
-	background-color: #fb451d;
+	background-color: #000;
 	color: #fff;
 }
 .projects-action .projects-btn ~ .projects-btn {
@@ -10964,8 +10965,10 @@ h2.footer-title:after {
 	display: none;
 }
 .dashboard-page .content {
-    padding: 144px 0 30px;
+    padding: 145px 0 142px  ;
 }
+
+
 .dashboard-page .header {
 	border-bottom: 1px solid #e3e3e3;
 }
@@ -11498,7 +11501,7 @@ body.chat-page {
 		list-style: none;
 	}
 	.main-nav ul {
-		background-color: #ffe7e1;
+		background-color:#7a7a7a;
 		display: none;
 		list-style: none;
 		margin: 0;
@@ -11515,7 +11518,7 @@ body.chat-page {
 	.main-nav > li > a {
 		line-height: 1.5;
 		padding: 15px 20px !important;
-		color: #263238 !important;
+		color: #fff !important;
 		font-size: 14px;
 		font-weight: 500;
 		background: transparent !important;
@@ -11533,7 +11536,7 @@ body.chat-page {
 	}
 	.main-nav > li .submenu li a {
 		border-top: 0;
-		color: #263238 ;
+		color: #fff ;
 		padding: 10px 15px 10px 35px;
 	}
 	.main-nav > li .submenu ul li a {
@@ -11569,7 +11572,7 @@ body.chat-page {
 		-moz-transition: all 0.4s;
 		-webkit-transition: all 0.4s;
 		-o-transition: all 0.4s;
-		background-color: #fff4f0;
+		background-color: #5c616661;
 	}
 	.menu-header {
 		display: -webkit-box;
@@ -11989,7 +11992,7 @@ body.chat-page {
 	}
 	.user-tabs .nav-tabs.nav-tabs-bottom > li > a.active, .user-tabs .nav-tabs.nav-tabs-bottom > li > a.active:hover, .user-tabs .nav-tabs.nav-tabs-bottom > li > a.active:focus {
 		border-left-width: 2px;
-		color: #ff508b;
+		color: #3486DA;
 	}
 	.nav-tabs.nav-tabs-bottom > li > a.active, .nav-tabs.nav-tabs-bottom > li > a.active:hover, .nav-tabs.nav-tabs-bottom > li > a.active:focus {
 		background-color: #f5f5f5;

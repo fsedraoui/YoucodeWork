@@ -41,7 +41,7 @@
 										<div class="title-detail">
 											<h3>Nom du projet </h3>
 											<div class="form-group mb-0">
-												<input type="text" name="name" class="form-control" placeholder="Enter Project title">
+										<input type="text" name="name" class="form-control" required placeholder="Enter Project title" @isset($project)  value="{{$project->name}}" @endisset>
 											</div>
 										</div>					
 									</div>
@@ -51,7 +51,7 @@
 										<div class="title-detail">
 											<h3>Technologies utilisées</h3>
 											<div class="form-group mb-0">
-												<input type="text" data-role="tagsinput" name="technologies" class="input-tags form-control" value="" id="services" placeholder="PHP, React, sass, JAVA, Angular">
+												<input type="text" data-role="tagsinput" name="technologies" class="input-tags form-control" value="" id="services" placeholder="PHP, React, sass, JAVA, Angular" required>
 												<p class="text-muted mb-0">saisir les Technologies utilisées pour votre projet</p>
 											</div>
 										</div>					
@@ -65,8 +65,8 @@
 												<div class="row form-row links-cont">
 													<div class="col-12 col-md-12">
 														<div class="form-group mb-0">
-															<input type="text" class="form-control" name="repoLink">
-															<p class="mb-0">Ajouter le lien vers votre projet hébérgé</p>
+															<input type="text" class="form-control" name="liensite" required @isset($project)  value="{{$project->repoLink}}" @endisset>
+															<p class="mb-0">Ajouter le lien vers votre projet hébérgé ex:youcode.com</p>
 														</div> 
 													</div>
 													
@@ -84,8 +84,8 @@
 												<div class="row form-row links-cont">
 													<div class="col-12 col-md-12">
 														<div class="form-group mb-0">
-															<input type="text" class="form-control" name="lienImage1">
-															<p class="mb-0">Ajouter le lien vers votre image de couverture</p>
+															<input type="text" class="form-control" name="lienImage1" required @isset($project)  value="{{$project->lienImage1}}" @endisset>
+															<p class="mb-0">Ajouter le lien vers votre image de couverture ex:www.github.com/yourGitHub/ProjectName/master/image.png</p>
 														</div> 
 													</div>
 													
@@ -112,7 +112,7 @@
 										<div class="title-detail">
 											<h3>Contributeurs </h3>
 											<div class="form-group mb-0">
-											<select class="contributors" name="contributors[]" multiple="multiple">
+											<select class="contributors" name="contributors[]" multiple="multiple" required >
 												@foreach($students as $student)
 													<option data-role="tagsinput">{{$student->email}}</option>
 												@endforeach											
@@ -129,7 +129,7 @@
 												<div class="row form-row links-cont">
 													<div class="col-12 col-md-12">
 														<div class="form-group mb-0">
-															<input type="text" class="form-control" name="repoLink">
+															<input type="text" class="form-control" name="repoLink" required @isset($project)  value="{{$project->repoLink}}" @endisset>
 															<p class="mb-0">Ajouter le lien GitHub de votre projet</p>
 														</div> 
 													</div>
@@ -143,7 +143,7 @@
 										<div class="title-detail">
 											<h3>Description du projet </h3>
 											<div class="form-group mb-0">
-												<textarea class="form-control" rows="5" name="description"></textarea>
+												<textarea class="form-control" rows="5" name="description" required @isset($project)  value="{{$project->description}}" @endisset></textarea>
 											</div>
 										</div>					
 									</div>
@@ -154,7 +154,7 @@
 										<div class="title-detail">
 											<h3>Tags </h3>
 											<div class="form-group mb-0">
-												<input type="text" data-role="tagsinput" name="tags" class="input-tags form-control" name="services" value="Web Design" id="services" placeholder="UX, UI, GIT, Trello, Wireframing">
+												<input type="text" data-role="tagsinput" name="tags" class="input-tags form-control" name="services" value="Web Design" id="services" placeholder="UX, UI, GIT, Trello, Wireframing" required>
 												<p class="text-muted mb-0">saisir les compètences utilisées pour votre projet</p>
 											</div>
 										</div>					
@@ -162,14 +162,14 @@
 									<!-- /Skills Content -->
 									
 										
-									
+									@isset($project)<input   type="hidden" name="idProjet" value="{{$project->id}}" style=" margin-right: 5%;" />@endisset
 									
 									<div class="title-content">
 										<div class="title-detail">
 											<h3>Formateur Référent </h3>
 											<div class="form-group mb-0">
 
-											<select class="instructor" data-role="tagsinput" name="instructor">
+											<select class="instructor" data-role="tagsinput" name="instructor" required>
 												@foreach($instructors as $instructor)
 													<option value="{{$instructor->email}}">{{$instructor->firstName}} {{$instructor->lastName}}</option>
 												@endforeach											

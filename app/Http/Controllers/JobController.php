@@ -54,7 +54,7 @@ class JobController extends Controller
     {
 
         
-        $jobs = Job::paginate(4);
+        $jobs = Job::with('recruiter')->paginate(4);
        
         $currentUser = Auth::user();
         return view('view-jobs',compact("jobs","currentUser"));

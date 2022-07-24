@@ -23,9 +23,7 @@ use App\Http\Controllers\JobController;
 
 
 Route::Group(['prefix' => 'admin'], function () { 
-    Route::get('/index_admin', function () {
-        return view('admin.index_admin');
-    })->name('index_admin');
+    Route::get('/index_admin',  [StudentController::class, 'allDashAdmin'])->middleware(['auth'])->name('index_admin');
     Route::get('/categories', function () {
         return view('admin.categories');
     })->name('categories');
@@ -36,7 +34,7 @@ Route::Group(['prefix' => 'admin'], function () {
     Route::post('/project-a-supprimer', [ProjectController::class, 'supprimerProjectById'])->middleware(['auth'])->name('project-a-supprimer');
     
     
-    Route::get('/users', function () { return view('admin.users'); })->name('users');
+    Route::get('/users', [StudentController::class, 'allStudents'])->middleware(['auth'])->name('users');
     Route::get('/providers', function () {
         return view('admin.providers');
     })->name('providers');
@@ -57,10 +55,12 @@ Route::get('/', function () {
     })->name('home');   
  
   
+    
 Route::get('/redirectafterlogin', [StudentController::class, 'Role'])->middleware(['auth'])->name('redirectafterlogin');
 //Route::get('/loginR', function () {  return view('login'); })->name('loginR');
     
 Route::get('/dashboard', [StudentController::class, 'DashboardApprenant'])->middleware(['auth'])->name('dashboard');
+Route::post('/dashboard', [StudentController::class, 'DashboardApprenant'])->middleware(['auth'])->name('dashboard');
 
 /*Route::get('/dashboard', function () {
     if(Auth::user()->role == 'recruiter'){
@@ -81,10 +81,12 @@ Route::get('/apprenant-dashboard', function () {return view('apprenant-dashboard
 Route::get('/manage-projects', function () { return view('manage-projects');})->name('manage-projects');
 
 Route::get('/apprenant-projetsvalides', [StudentController::class, 'projetByStudent'])->middleware(['auth'])->name('apprenant-projetsvalides');
+Route::get('/projetsenInstance', [StudentController::class, 'projetEnInstanceByStudent'])->middleware(['auth'])->name('projetsenInstance');
 //Route::get('/freelancer-project-proposals', [ProjectController::class, 'allProjects'])->middleware(['auth'])->name('freelancer-project-proposals');
 Route::get('/post-project', [ProjectController::class, 'create'])->middleware(['auth'])->name('post-project');
 Route::post('/post-project', [ProjectController::class, 'store'])->middleware(['auth'])->name('store-project');
 
+Route::post('/project-update', [ProjectController::class, 'projectUpdateById'])->middleware(['auth'])->name('project-update');
 
 Route::get('/project-details/{projectId}', [ProjectController::class, 'projectById'])->middleware(['auth'])->name('project-details');
 Route::get('/projects', [ProjectController::class, 'allProjects'])->middleware(['auth'])->name('projects');
